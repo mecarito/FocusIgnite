@@ -1,13 +1,12 @@
 {
   "name": "focusignite",
   "version": "1.0.0",
-  "description": "A simple package to help with folder structure in Nextjs, React and Angular applications",
+  "description": "A simple package to help with folder structure in Nextjs applications",
   "main": "dist/index.js",
   "scripts": {
     "start": "tsc && node dist/index.js"
   },
   "keywords": [
-    "React",
     "UI",
     "Folder structure",
     "Nextjs"
@@ -24,13 +23,11 @@
     "@types/figlet": "^1.5.5",
     "@types/inquirer": "^9.0.3",
     "@types/node-emoji": "^1.8.2",
-    "@types/touch": "^3.1.2",
     "chalk": "4.1.0",
     "clear": "0.1.0",
     "figlet": "1.5.0",
     "inquirer": "7.3.3",
     "node-emoji": "1.10.0",
-    "ora": "5.0.0",
-    "touch": "3.1.0"
+    "ora": "5.0.0"
   }
 }

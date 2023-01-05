@@ -3,7 +3,6 @@ import inquirer from 'inquirer';
 import fs from 'fs';
 import chalk from 'chalk';
 import emoji from 'node-emoji';
-import touch from 'touch';
 import ora from 'ora';
 
 interface QuestionsResponse {
@@ -11,8 +10,6 @@ interface QuestionsResponse {
 }
 
 export class CreateStructure {
-  private subDirectories: string[];
-
   constructor() {}
 
   private askSomeQuestions(): Promise<QuestionsResponse> {
@@ -27,21 +24,26 @@ export class CreateStructure {
       });
       if (directory) {
         const spinner = ora('Creating directories').start();
+
         setTimeout(() => {
           spinner.color = 'yellow';
           spinner.text = 'Creating directories';
+
           nextJsFolders.forEach((folder: string) => {
             fs.mkdirSync(`${directory}/${folder}`, {
               recursive: true,
             });
           });
+
           spinner.stop();
+
           console.log(
             chalk.greenBright(
               'Successfully created directories',
               emoji.get('sunglasses')
             )
           );
+
           console.log(
             chalk.greenBright(
               'speed is of the essence',
@@ -61,9 +63,7 @@ export class CreateStructure {
         );
       }
     } else {
-      console.log(
-        chalk.greenBright(emoji.get('cry'), 'Directory not created')
-      );
+      console.log(chalk.greenBright(emoji.get('cry'), 'Directory not created'));
     }
   }
 }
