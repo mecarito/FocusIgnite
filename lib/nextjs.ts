@@ -1,29 +1,69 @@
-import { nextJsFolders } from './constants';
+import { nextJsFolders, questions } from './constants';
 import inquirer from 'inquirer';
 import fs from 'fs';
+import chalk from 'chalk';
+import emoji from 'node-emoji';
+import touch from 'touch';
+import ora from 'ora';
 
-function askSomeQuestions() {
-  const questions = [
-    {
-      name: 'folders',
-      type: 'confirm',
-      message: `Creating src directory in the root directory with: ${nextJsFolders} directories in it`,
-    },
-  ];
-  return inquirer.prompt(questions);
+interface QuestionsResponse {
+  directoryResponse: boolean;
 }
 
-function createFolders() {
-  fs.mkdirSync("./", {
-      recursive: true,
-  });
-  modulefolders.forEach((folder) => {
-      const submodulefolders = modulepath.concat("/", folder);
-      fs.mkdirSync(submodulefolders, {
-          recursive: true,
+export class CreateStructure {
+  private subDirectories: string[];
+
+  constructor() {}
+
+  private askSomeQuestions(): Promise<QuestionsResponse> {
+    return inquirer.prompt(questions);
+  }
+
+  async create() {
+    const { directoryResponse } = await this.askSomeQuestions();
+    if (directoryResponse) {
+      const directory = fs.mkdirSync('./src', {
+        recursive: true,
       });
-  });
-  const filepath = modulepath.concat("/", credentials.modulename, ".module.ts");
-  touch(filepath);
+      if (directory) {
+        const spinner = ora('Creating directories').start();
+        setTimeout(() => {
+          spinner.color = 'yellow';
+          spinner.text = 'Creating directories';
+          nextJsFolders.forEach((folder: string) => {
+            fs.mkdirSync(`${directory}/${folder}`, {
+              recursive: true,
+            });
+          });
+          spinner.stop();
+          console.log(
+            chalk.greenBright(
+              'Successfully created directories',
+              emoji.get('sunglasses')
+            )
+          );
+          console.log(
+            chalk.greenBright(
+              'speed is of the essence',
+              emoji.get('robot_face'),
+              emoji.get('rocket')
+            )
+          );
+        }, 1500);
+      }
+      if (directory == undefined) {
+        console.log(
+          chalk.greenBright(
+            'Directory exists',
+            emoji.get('robot_face'),
+            emoji.get('rocket')
+          )
+        );
+      }
+    } else {
+      console.log(
+        chalk.greenBright(emoji.get('cry'), 'Directory not created')
+      );
+    }
+  }
 }
-export { askSomeQuestions };
