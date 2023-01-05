@@ -1,32 +1,34 @@
 import chalk from 'chalk';
 import clear from 'clear';
 import figlet from 'figlet';
-import fs from 'fs';
 import touch from 'touch';
 import emoji from 'node-emoji';
 import ora from 'ora';
+import { askSomeQuestions } from './lib/nextjs';
 
-const spinner = ora('Loading unicorns').start();
+// const spinner = ora('Loading unicorns').start();
 
-setTimeout(() => {
-  spinner.color = 'yellow';
-  spinner.text = 'Loading rainbows';
-}, 1000);
+// setTimeout(() => {
+//   spinner.color = 'yellow';
+//   spinner.text = 'Loading rainbows';
+// }, 1000);
 
-clear();
+// clear();
 
 console.log(
   chalk.cyanBright.bold(
-    figlet.textSync('Bfast  UI', {
-      horizontalLayout: 'default',
-      verticalLayout: 'default',
+    figlet.textSync('Focus  Ignite', {
+      horizontalLayout: 'controlled smushing',
+      verticalLayout: 'controlled smushing',
       width: 80,
-      whitespaceBreak: false,
+      whitespaceBreak: true,
     })
   )
 );
 
-const run = async () => {
+async function run() {
+  const answers = await askSomeQuestions();
+  console.log(answers);
   const modulefolders = [
     'components',
     'guards',
@@ -67,18 +69,6 @@ const run = async () => {
       emoji.get('rocket')
     )
   );
-
-  // const status = new Spinner(' Creating the necessary modules and files, please wait...');
-  // status.start();
-  // status.stop();
-};
+}
 
 run();
-
-// const filelist = _.without(fs.readdirSync('.'), '.git', '.gitignore');
-
-// if (filelist.length) {
-//     console.log('file already exists')
-// } else {
-//     touch('.gitignore');
-// }
