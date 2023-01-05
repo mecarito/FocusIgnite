@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import clear from 'clear';
 import figlet from 'figlet';
 import chalk from 'chalk';

@@ -1,10 +1,14 @@
 {
   "name": "focusignite",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A simple package to help with folder structure in Nextjs applications",
   "main": "dist/index.js",
   "scripts": {
-    "start": "tsc && node dist/index.js"
+    "start": "tsc && node dist/index.js",
+    "build": "tsc"
+  },
+  "bin": {
+    "focusignite": "dist/index.js"
   },
   "keywords": [
     "UI",

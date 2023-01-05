@@ -1,11 +1,12 @@
 {
   "include": ["lib/**/*","index.ts"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "dist"],
   "compilerOptions": {
     "module": "commonjs",
     "esModuleInterop": true,
     "target": "es6",
     "moduleResolution": "node",
+    "declaration": true,
     "sourceMap": true,
     "outDir": "dist"
   },
